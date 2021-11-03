@@ -1,0 +1,11 @@
+<apex:page controller="TokenHelper">
+    <h1>Retrieving Token </h1>
+    <br></br>
+    <h1>User: {!$User.FirstName}!</h1>
+    <div>
+        <p>Token Value:</p>
+        <apex:form >
+         <apex:outputLabel id="MyToken">{!AcccessToken}</apex:outputLabel>     
+        </apex:form>
+    </div>
+</apex:page>
