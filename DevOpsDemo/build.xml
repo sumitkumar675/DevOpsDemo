@@ -1,48 +1,8 @@
-<project name="Sample usage of Salesforce Ant tasks" default="retrieve_sf4outlook" basedir="." xmlns:sf="antlib:com.salesforce">
-
-    <property file="local.properties"/>
-    <property file="build.properties"/>
-    <property environment="env"/>
-
-    <taskdef resource="com/salesforce/antlib.xml" uri="antlib:com.salesforce">
-        <classpath>
-            <pathelement location="C:/ANT/ant-salesforce.jar" />        	
-        </classpath>
-    </taskdef>
-	
-    <target name="Validate">
-    <sf:deploy 
-			username="${sf.username}"
-			password="${sf.password}" 
-			serverurl="${sf.serverurl}" 
-			deployRoot="retrieveUnpackaged" 
-			autoUpdatePackage="true"
-			checkOnly="true"
-			rollbackOnError="true"/>
-    </target> 
-	
-	<target name="ValidateTest">
-    <sf:deploy 
-			username="${sf.username}" 
-			password="${sf.password}" 
-            serverurl="${sf.serverurl}"
-            deployroot="retrieveUnpackaged" 
-			autoUpdatePackage="true"
-			checkOnly="true"
-			testLevel="RunSpecifiedTests">
-        <runTest>SampleFailingTestClass</runTest>
-    </sf:deploy>
+<project name=”Sample usage of Salesforce Ant tasks” default=”test” basedir=”.” xmlns:sf=”antlib:com.salesforce”>
+<property file=”build.properties”/>
+<property environment=”env”/>
+<! — Deploy the unpackaged set of metadata retrieved with retrieveUnpackaged and run tests in this organization’s namespace only →
+<target name=”deployall”>
+<sf:deploy username=”${sf.username}” password=”${sf.password}” serverurl=”${sf.serverurl}” testlevel=”NoTestRun” logtype=”Detail” deployRoot=”force-app”/>
 </target>
-
-	<target name="Deploy">
-    <sf:deploy 
-			username="${sf.username}"
-			password="${sf.password}" 
-			serverurl="${sf.serverurl}" 
-			autoUpdatePackage="true"
-			deployRoot="retrieveUnpackaged" 
-			rollbackOnError="true"/>
-    </target> 
-
 </project>
-
